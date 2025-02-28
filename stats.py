@@ -9,17 +9,9 @@ def count_words(book_text):
 #counts the unique characters, numbers and special character in the input text and returns it as a dict
 def count_chars(book_text):
     char_count = {}
-    char_list = []
-    for char in book_text:
-        if char not in char_list:
-            char_list.append(char.lower())
-    for char in char_list:
-        char_counter = 0
-        if char in book_text.lower():
-            char_counter += 1
-        char_count[char] = char_counter
-    # print(char_list)
-    # print(char_count)
+    for char in book_text.lower():
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
     return char_count
-
-# count_chars("ABCDE")
