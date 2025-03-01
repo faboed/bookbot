@@ -15,3 +15,10 @@ def count_chars(book_text):
         else:
             char_count[char] = 1
     return char_count
+
+#turns the dictionary into a list of dictionaries for a pretty print and sorts it
+def count_chars_list(char_count):
+    list_char_count = []
+    for k, v in char_count.items():
+        list_char_count.append({"char": k, "num": v})
+    return list_char_count
