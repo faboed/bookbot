@@ -14,8 +14,24 @@ def main(path):
     word_count = count_words(book_text)
     char_count = count_chars(book_text)
     list_output = count_chars_list(char_count)
-    print(f"{word_count} words found in the document")
-    #print(char_count)
-    print(list_output)
+    
+    # After getting your sorted character list and word count
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {path}...")
+    print("----------- Word Count ----------")
+    print(f"Found {word_count} total words")
+    print("--------- Character Count -------")
+
+    # Loop through your sorted character list
+    for char_dict in list_output:
+        char = char_dict["char"]
+        count = char_dict["num"]
+    
+    # Only print alphabetical characters
+        if char.isalpha():
+            print(f"{char}: {count}")
+
+    print("============= END ===============")
+
 
 main("books/frankenstein.txt")
