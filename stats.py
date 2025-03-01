@@ -16,11 +16,11 @@ def count_chars(book_text):
             char_count[char] = 1
     return char_count
 
-#sorting function
+#sorting function for any dict with the key "num"
 def sort_on(dict):
     return dict["num"]
 
-#turns the dictionary into a list of dictionaries for a pretty print and sorts it
+#turns the dictionary into a list of two key/ value dictionaries (char and num) and applies the sorting
 def count_chars_list(char_count):
     list_char_count = []
     for k, v in char_count.items():

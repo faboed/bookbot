@@ -1,16 +1,9 @@
-from stats import count_words
-from stats import count_chars
-from stats import count_chars_list
-# calling the filepath of a specific book with get_book_text()
-#f.read is turning inputs into strings
-def get_book_text(filepath):
-    with open(filepath) as f:
-        book_text = f.read()
-    return book_text
+from stats import count_words, count_chars, count_chars_list
 
-# prints the relative path to a specific book calling the function
+# Calls a function to import text from a filepath and transforms it into a book report based on functions in stats.py
 def main(path):
-    book_text = get_book_text(path)
+    with open(path) as f:
+        book_text = f.read()
     word_count = count_words(book_text)
     char_count = count_chars(book_text)
     list_output = count_chars_list(char_count)
