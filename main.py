@@ -1,35 +1,41 @@
-from stats import count_words, count_chars, count_chars_list
 import sys
 
-#check if main.py is called with at least 2 arguments
-if len(sys.argv) < 2:
-    print("Usage: python3 main.py <path_to_book>")
-    sys.exit(1)
+def count_words(book_text):
+    word_count = 0
+    book_text_list = book_text.split()
+    for word in book_text_list:
+        word_count += 1
+    return word_count
 
-#filepath setting
-path = sys.argv[1]
+def count_chars(book_text):
+    char_count = {}
+    for char in book_text.lower():
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+    return char_count
 
-# import text from a filepath and transforms it into a book report based on functions in stats.py
-with open(path) as f:
-    book_text = f.read()
-word_count = count_words(book_text)
-char_count = count_chars(book_text)
-list_output = count_chars_list(char_count)
+def sort_on(dict):
+    return dict["num"]
+
+def count_chars_list(char_count):
+    list_char_count = []
+    for k, v in char_count.items():
+        list_char_count.append({"char": k, "num": v})
+    list_char_count.sort(reverse=True, key=sort_on)
+    return list_char_count
+
+def report(path):
+    with open(path) as f:
+        book_text = f.read()
     
-# After getting your sorted character list and word count
-print("============ BOOKBOT ============")
-print(f"Analyzing book found at {path}...")
-print("----------- Word Count ----------")
-print(f"Found {word_count} total words")
-print("--------- Character Count -------")
-
-# Loop through your sorted character list
-for char_dict in list_output:
-    char = char_dict["char"]
-    count = char_dict["num"]
+    word_count = count_words(book_text)
+    char_count = count_chars(book_text)
+    list_output = count_chars_list(char_count)
     
-# Only print alphabetical characters
-    if char.isalpha():
-        print(f"{char}: {count}")
-
-print("============= END ===============")
+    # Return data for GUI instead of printing
+    return {
+        "word_count": word_count,
+        "character_data": list_output
+    }
